@@ -32,8 +32,10 @@ video.addEventListener('play', () => {
     try {
       let emocoes = detections[0].expressions
       let imagem = document.getElementsByClassName("active")[0].innerHTML
+      var dados_enviar = [emocoes, imagem]
       console.log(emocoes)
       console.log(imagem)
+      enviar_dados(dados_enviar)
     }
     catch(TypeError) {}
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
