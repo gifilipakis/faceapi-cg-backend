@@ -14,6 +14,13 @@ function startVideo() {
     err => console.error(err)
   )
 }
+function enviar_dados(array_dados){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:5000",
+    data: array_dados,
+  });
+}
 
 video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
