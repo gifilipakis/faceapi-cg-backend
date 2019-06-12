@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script defer src="face-api.min.js"></script>
+  <script defer src="script.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: 75% 25%;
+      grid-template-areas: "main"
+                        "footer";
+    }
+
+    video, canvas{
+      grid-area: footer;
+      justify-self: end;
+    }
+    
+    #imagens{      
+      grid-area: main;
+      justify-self: center;
+      align-self: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="imagens" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1558086478-d632ccc5a833?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=645&h=322&fit=crop&ixid=eyJhcHBfaWQiOjF9" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1559147625-8a594bd63c9b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=645&h=322&fit=crop&ixid=eyJhcHBfaWQiOjF9" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="https://images.unsplash.com/photo-1559043369-aaf840747854?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=645&h=322&fit=crop&ixid=eyJhcHBfaWQiOjF9" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#imagens" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#imagens" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <video id="video" width="200" height="160" autoplay muted></video>
+</body>
+<!-- <script>
+var i = 0
+document.span.addEventListener("mouseup", informacoes);
+function informacoes(){
+  if(i<3){
+    var tempo = Date.now()
+    var links = document.getElementsByTagName("img")[i].src;
+    console.log(link)
+    console.log("hey")
+  }
+  i++;
+}
+</script> -->
+</html>
