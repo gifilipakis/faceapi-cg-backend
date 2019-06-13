@@ -32,7 +32,7 @@ video.addEventListener('play', () => {
     try {
       let emocoes = detections[0].expressions
       let imagem = document.getElementsByClassName("active")[0].innerHTML
-      console.log(emocoes)
+      //console.log(emocoes)
       //console.log(imagem)
       enviar_dados([emocoes, imagem])
     }
