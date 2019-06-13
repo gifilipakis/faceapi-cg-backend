@@ -14,6 +14,13 @@ function startVideo() {
     err => console.error(err)
   )
 }
+function enviar_dados(array_dados){
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:5000",
+    data: array_dados,
+  });
+}
 
 video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(video)
@@ -22,7 +29,14 @@ video.addEventListener('play', () => {
   faceapi.matchDimensions(canvas, displaySize)
   setInterval(async () => {
     const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
-    console.log(detections[0].expressions)
+    try {
+      let emocoes = detections[0].expressions
+      let imagem = document.getElementsByClassName("active")[0].innerHTML
+      //console.log(emocoes)
+      //console.log(imagem)
+      enviar_dados([emocoes, imagem])
+    }
+    catch(TypeError) {}
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
