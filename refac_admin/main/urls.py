@@ -1,12 +1,14 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from main import views
+from django.urls import include, path
+from .api import urls as api_urls
+from . import views
 
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
 
-router = DefaultRouter()
-router.register(r'pessoas', views.ViewPessoa)
-
+app_name = 'refac_api'
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(api_urls)),
+    path('refac/<id_pagina>', views.pagina_refac_imagem),
+    path('auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

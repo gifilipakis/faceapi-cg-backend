@@ -10,7 +10,7 @@ class Pessoa(models.Model):
     bairro = models.CharField(max_length=255, verbose_name='Bairro', blank=False, null=True)
     sexo = models.CharField(max_length=1, verbose_name='Sexo', choices=(('M','Masculino'),
                                                                         ('F', 'Feminino')))
-    usuario = models.OneToOneField(User,on_delete=models.SET_NULL, null=True)
+    usuario = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.nome if self.nome is not None else 'Sem nome'
@@ -19,6 +19,9 @@ class Pessoa(models.Model):
 class Emocao(models.Model):
     class Meta:
         unique_together = ('raiva', 'nojo', 'alegria', 'medo', 'tristeza', 'surpresa', 'neutro')
+        verbose_name_plural = 'Emoções'
+        verbose_name = 'Emoção'
+
     raiva = models.FloatField(verbose_name='Raiva')
     nojo = models.FloatField(verbose_name='Nojo')
     alegria = models.FloatField(verbose_name='Alegria')
@@ -30,10 +33,28 @@ class Emocao(models.Model):
 
 class Pagina(models.Model):
     titulo = models.CharField(max_length=128, verbose_name='Titulo', blank=False, null=True)
-
-
-class Imagem(models.Model):
-    arquivo = models.FileField()
+    arquivos = models.ManyToManyField('Arquivo', through='ArquivoPagina', blank=True, null=True)
 
     def __str__(self):
-        return self.arquivo.instance.name
+        return self.titulo
+
+
+def diretorio_arquivos(instance, filename):
+    return 'refac/arquivos/{}'.format(filename)
+
+
+class Arquivo(models.Model):
+    nome_arquivo = models.CharField(verbose_name='Nome do arquivo', max_length=64, blank=True, null=True)
+    imagem = models.FileField('Arquivo', upload_to=diretorio_arquivos,
+                                         null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_arquivo
+
+
+class ArquivoPagina(models.Model):
+    pagina = models.ForeignKey(Pagina, on_delete=models.CASCADE)
+    arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.arquivo.nome_arquivo + ' da Página ' + self.pagina.titulo
