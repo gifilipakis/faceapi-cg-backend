@@ -7,3 +7,7 @@ def pagina_refac_imagem(request, id_pagina):
     imagens = Pagina.objects.get(id=id_pagina).arquivos.all()
     context = {'imagens': imagens}
     return render(request, template_name='main/index.html', context=context)
+
+
+def cadastro_pessoa(request, id_pagina):
+    return render(request, template_name='main/cadastro_pessoa.html')

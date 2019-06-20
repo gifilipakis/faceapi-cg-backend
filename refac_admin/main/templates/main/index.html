@@ -8,7 +8,7 @@
     <h1>Olá Mundo!</h1>
     <ul>
         {% for img in imagens %}
-            <li>img</li>
+            <li><img src="{{ img|safe }}"</li>
         {% endfor %}
     </ul>
 </body>

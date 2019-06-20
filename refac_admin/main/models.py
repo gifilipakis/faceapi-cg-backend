@@ -30,10 +30,16 @@ class Emocao(models.Model):
     surpresa = models.FloatField(verbose_name='Surpresa')
     neutro = models.FloatField(verbose_name='Neutro')
 
+    def __str__(self):
+        return 'Emoções: {}, {}, {}, {}, {}, {}, {}.'.format(
+            str(self.raiva), str(self.nojo), str(self.alegria),
+            str(self.medo), str(self.tristeza), str(self.surpresa), str(self.neutro)
+        )
+
 
 class Pagina(models.Model):
     titulo = models.CharField(max_length=128, verbose_name='Titulo', blank=False, null=True)
-    arquivos = models.ManyToManyField('Arquivo', through='ArquivoPagina', blank=True, null=True)
+    arquivos = models.ManyToManyField('Arquivo', through='ArquivoPagina')
 
     def __str__(self):
         return self.titulo
@@ -58,3 +64,12 @@ class ArquivoPagina(models.Model):
 
     def __str__(self):
         return self.arquivo.nome_arquivo + ' da Página ' + self.pagina.titulo
+
+
+class ArquivoPaginaPessoa(models.Model):
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True, blank=True)
+    arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE)
+    emocao = models.ForeignKey(Emocao, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.arquivo) + ' as emoções foram ' + str(self.emocao)
