@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from ..models import Pessoa, Emocao, Arquivo, Pagina
+from ..models import Participante, Emocao, Arquivo, Pagina
 
 
 class PessoaSerializers(serializers.ModelSerializer):
     class Meta:
-        model = Pessoa
+        model = Participante
         fields = '__all__'
 
 

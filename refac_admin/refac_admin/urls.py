@@ -20,5 +20,5 @@ from main import urls as main_url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(main_url)),
+    path('', include(main_url)),
 ]

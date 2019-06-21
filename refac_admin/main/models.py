@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Pessoa(models.Model):
+class Participante(models.Model):
     nome = models.CharField(max_length=255, verbose_name='Nome completo', blank=False, null=True)
     cidade = models.CharField(max_length=255, verbose_name='Cidade', blank=False, null=True)
     bairro = models.CharField(max_length=255, verbose_name='Bairro', blank=False, null=True)
     sexo = models.CharField(max_length=1, verbose_name='Sexo', choices=(('M','Masculino'),
                                                                         ('F', 'Feminino')))
-    usuario = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+    idade = models.PositiveIntegerField()
 
     def __str__(self):
         return self.nome if self.nome is not None else 'Sem nome'
@@ -39,7 +39,9 @@ class Emocao(models.Model):
 
 class Pagina(models.Model):
     titulo = models.CharField(max_length=128, verbose_name='Titulo', blank=False, null=True)
-    arquivos = models.ManyToManyField('Arquivo', through='ArquivoPagina')
+    arquivos = models.ManyToManyField('Arquivo', through='ArquivoPagina', blank=True)
+    video_url = models.CharField(max_length=600, verbose_name='URL Vídeo YouTube', null=True, blank=True)
+    responsavel = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.titulo
@@ -67,7 +69,7 @@ class ArquivoPagina(models.Model):
 
 
 class ArquivoPaginaPessoa(models.Model):
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.SET_NULL, null=True, blank=True)
+    pessoa = models.ForeignKey(Participante, on_delete=models.SET_NULL, null=True, blank=True)
     arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE)
     emocao = models.ForeignKey(Emocao, on_delete=models.SET_NULL, null=True, blank=True)
 

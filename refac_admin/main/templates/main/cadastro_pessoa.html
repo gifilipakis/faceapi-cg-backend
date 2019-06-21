@@ -9,25 +9,51 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+      {% load bootstrap4 %}
   </head>
   <body>
-  <
-    <form>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <header class="bg-dark p-2 mb-4">
+        <nav>
+            <h3 class="pull-left" style="color: white">REFAF</h3>
+        </nav>
+    </header>
+    <main role="main">
+        <div class="container">
+            <div class="featurette-divider"/>
+            <div class="row featurette">
+                <div class="col-md-12">
+                    <div class="alert alert-info">
+                        Após o cadastro a página de avaliação de sentimento das expressões faciais será exibida.
+                    </div>
+
+                    <form action="/participante/refac/{{ pagina }}" method="post" class="form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form_errors form %}
+                        <fieldset class="form-group">
+                            <legend>Dados pessoais</legend>
+                            <div class="form-row">
+                                {% bootstrap_field form.nome form_group_class='form-group col-md-7' %}
+                                {% bootstrap_field form.cidade form_group_class='form-group col-md-5' %}
+                            </div>
+                            <div class="form-row">
+                                {% bootstrap_field form.bairro form_group_class='form-group col-md-6' %}
+                                {% bootstrap_field form.sexo form_group_class='form-group col-md-3' %}
+                                {% bootstrap_field form.idade form_group_class='form-group col-md-3' %}
+                            </div>
+                        </fieldset>
+
+                        {% buttons %}
+                            <button type="submit" class="btn btn-success col-sm-2 float-right ml-2">Continuar</button>
+                            <button type="reset" class="btn btn-secondary col-sm-2 float-right ml-2">Limpar</button>
+                        {% endbuttons %}
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

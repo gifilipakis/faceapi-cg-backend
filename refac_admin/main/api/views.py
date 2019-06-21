@@ -3,7 +3,7 @@ from .serializers import *
 
 
 class ViewPessoa(viewsets.ModelViewSet):
-    queryset = Pessoa.objects.all()
+    queryset = Participante.objects.all()
     serializer_class = PessoaSerializers
 
 
