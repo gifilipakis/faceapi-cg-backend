@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ..models import Participante, Emocao, Arquivo, Pagina
+from ..models import Participante, Arquivo, Pagina, PessoaEmocao
 
 
 class PessoaSerializers(serializers.ModelSerializer):
@@ -14,13 +14,13 @@ class PaginaSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class EmocaoSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Emocao
-        fields = '__all__'
-
-
 class ArquivoSerializers(serializers.ModelSerializer):
     class Meta:
         model = Arquivo
+        fields = '__all__'
+
+
+class PessoaEmocaoSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = PessoaEmocao
         fields = '__all__'

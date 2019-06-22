@@ -9,7 +9,7 @@ app_name = 'refac_api'
 
 urlpatterns = [
     path('', include(api_urls)),
-    path('refac/<id_pagina>', views.pagina_refac_imagem),
-    path('participante/refac/<id_pagina>', views.dados_participante, name='dados_participante'),
+    path('refac/<id_pagina>/<id_pessoa>', views.pagina_refac_imagem),
+    path('share/refac/<id_pagina>', views.dados_participante, name='dados_participante'),
     path('auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

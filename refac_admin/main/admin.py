@@ -33,11 +33,6 @@ class PaginaAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(Emocao)
-class EmocaoAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(ArquivoPagina)
 class ArquivoPaginaAdmin(admin.ModelAdmin):
     pass

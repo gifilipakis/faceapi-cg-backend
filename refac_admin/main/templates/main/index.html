@@ -56,6 +56,8 @@
 {% endblock %}
 {% block extra_js %}
 <script>
+        let pessoa = {{ pessoa }};
+        let pagina = {{ pagina }}
         const video = document.getElementById('video');
         Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri("{% static 'main/js/models' %}"),

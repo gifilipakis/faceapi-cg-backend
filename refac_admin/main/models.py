@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Participante(models.Model):
+
     nome = models.CharField(max_length=255, verbose_name='Nome completo', blank=False, null=True)
     cidade = models.CharField(max_length=255, verbose_name='Cidade', blank=False, null=True)
     bairro = models.CharField(max_length=255, verbose_name='Bairro', blank=False, null=True)
@@ -14,27 +15,6 @@ class Participante(models.Model):
 
     def __str__(self):
         return self.nome if self.nome is not None else 'Sem nome'
-
-
-class Emocao(models.Model):
-    class Meta:
-        unique_together = ('raiva', 'nojo', 'alegria', 'medo', 'tristeza', 'surpresa', 'neutro')
-        verbose_name_plural = 'Emoções'
-        verbose_name = 'Emoção'
-
-    raiva = models.FloatField(verbose_name='Raiva')
-    nojo = models.FloatField(verbose_name='Nojo')
-    alegria = models.FloatField(verbose_name='Alegria')
-    medo = models.FloatField(verbose_name='Medo')
-    tristeza = models.FloatField(verbose_name='Tristeza')
-    surpresa = models.FloatField(verbose_name='Surpresa')
-    neutro = models.FloatField(verbose_name='Neutro')
-
-    def __str__(self):
-        return 'Emoções: {}, {}, {}, {}, {}, {}, {}.'.format(
-            str(self.raiva), str(self.nojo), str(self.alegria),
-            str(self.medo), str(self.tristeza), str(self.surpresa), str(self.neutro)
-        )
 
 
 class Pagina(models.Model):
@@ -68,10 +48,21 @@ class ArquivoPagina(models.Model):
         return self.arquivo.nome_arquivo + ' da Página ' + self.pagina.titulo
 
 
-class ArquivoPaginaPessoa(models.Model):
+class PessoaEmocao(models.Model):
+
     pessoa = models.ForeignKey(Participante, on_delete=models.SET_NULL, null=True, blank=True)
-    arquivo = models.ForeignKey(Arquivo, on_delete=models.CASCADE)
-    emocao = models.ForeignKey(Emocao, on_delete=models.SET_NULL, null=True, blank=True)
+    arquivo = models.ForeignKey(Arquivo, on_delete=models.SET_NULL, null=True, blank=True)
+    pagina = models.ForeignKey(Pagina, on_delete=models.SET_NULL, null=True, blank=True)
+    raiva = models.FloatField(verbose_name='Raiva')
+    nojo = models.FloatField(verbose_name='Nojo')
+    alegria = models.FloatField(verbose_name='Alegria')
+    medo = models.FloatField(verbose_name='Medo')
+    tristeza = models.FloatField(verbose_name='Tristeza')
+    surpresa = models.FloatField(verbose_name='Surpresa')
+    neutro = models.FloatField(verbose_name='Neutro')
 
     def __str__(self):
-        return str(self.arquivo) + ' as emoções foram ' + str(self.emocao)
+        return 'Emoções: {}, {}, {}, {}, {}, {}, {}.'.format(
+            str(self.raiva), str(self.nojo), str(self.alegria),
+            str(self.medo), str(self.tristeza), str(self.surpresa), str(self.neutro)
+        )

@@ -11,7 +11,7 @@
                         Após o cadastro a página de avaliação de sentimento das expressões faciais será exibida.
                     </div>
 
-                    <form action="/participante/refac/{{ pagina }}" method="post" class="form" enctype="multipart/form-data">
+                    <form action="/share/refac/{{ pagina }}" method="post" class="form" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form_errors form %}
                         <fieldset class="form-group">

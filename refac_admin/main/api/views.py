@@ -17,6 +17,6 @@ class ViewPagina(viewsets.ModelViewSet):
     serializer_class = PaginaSerializers
 
 
-class ViewEmocao(viewsets.ModelViewSet):
-    queryset = Emocao.objects.all()
-    serializer_class = EmocaoSerializers
+class ViewEmocoesPessoa(viewsets.ModelViewSet):
+    queryset = PessoaEmocao.objects.all()
+    serializer_class = PessoaEmocaoSerializers
