@@ -1,6 +1,6 @@
 boto3==1.9.173
 botocore==1.12.173
-Django==2.2.2
+Django==2.2.22
 django-bootstrap4==0.0.8
 django-filter==2.1.0
 django-storages==1.7.1
